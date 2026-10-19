@@ -1,0 +1,5 @@
+{"trace_id":"t-001","model":"gpt-4.1-mini","prompt":"Return a customer record as JSON","response":"name: Ada, email: ada@example.com","status":"failed","feedback":"JSON schema validation failed","latency_ms":430,"cost_usd":0.0012}
+{"trace_id":"t-002","model":"gpt-4.1-mini","prompt":"What does our handbook say about parental leave?","response":"The handbook gives 90 days paid leave.","status":"failed","feedback":"Hallucinated: this fact is not in context","latency_ms":510,"cost_usd":0.0014}
+{"trace_id":"t-003","model":"gpt-4.1-mini","prompt":"Search the policy index for travel expenses","response":"I can't find a relevant document in the supplied context.","status":"failed","feedback":"Retrieval returned no documents","latency_ms":620,"cost_usd":0.0017}
+{"trace_id":"t-004","model":"gpt-4.1","prompt":"Book the next available room","error":"tool_call calendar.create failed: invalid start_time","status":"error","latency_ms":810,"cost_usd":0.008}
+{"trace_id":"t-005","model":"gpt-4.1-mini","prompt":"Summarize this meeting","response":"A concise and accurate summary.","status":"success","score":1,"latency_ms":280,"cost_usd":0.0008}
