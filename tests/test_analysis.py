@@ -1,4 +1,4 @@
-from llm_postmortem.analysis import analyze, classify, is_failure
+from llm_postmortem.analysis import analyze, classify, is_failure, normalize_record
 from llm_postmortem.report import render_markdown
 
 
@@ -22,3 +22,14 @@ def test_report_contains_actionable_findings():
 def test_retrieval_signal_beats_generic_cant_response():
     record = {"status": "failed", "response": "I can't find a relevant document", "feedback": "Retrieval returned no documents"}
     assert classify(record) == "retrieval_failure"
+
+
+def test_ollama_duration_is_normalized_to_milliseconds():
+    record = normalize_record({"model": "llama3", "prompt": "hello", "response": "hi", "total_duration": 2_500_000})
+    assert record["source"] == "ollama"
+    assert record["latency_ms"] == 2.5
+
+
+def test_langchain_error_is_a_failure():
+    report = analyze([{"run_id": "run-1", "inputs": {"input": "hello"}, "outputs": {}, "error": "timeout"}])
+    assert report.failed_calls == 1

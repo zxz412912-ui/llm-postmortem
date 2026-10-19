@@ -47,6 +47,16 @@ One JSON object per line. The schema is permissive; only failure signals are req
 
 A call is treated as a failure if `status` is `error`, `failed`, `failure`, or `timeout`; `passed` is `false`; `score` is below `0.5`; or an `error` field is present.
 
+### Automatic adapters
+
+The CLI also accepts these JSONL shapes without an extra dependency:
+
+- **Ollama `/api/generate`** logs — maps `total_duration` to milliseconds.
+- **OpenAI Responses-style** wrapper logs — reads nested `response.id`, `response.model`, `response.output`, and `response.usage`.
+- **LangChain run exports** — maps `run_id`, `inputs`, `outputs`, `extra.invocation_params`, and `error`.
+
+For production traffic, write one JSON object per completed call to a `.jsonl` file, then point `llm-postmortem` at that file. Keep secrets and full end-user PII out of logs before sharing a report.
+
 ## Why this is useful
 
 Most LLM observability tools capture traces. This project focuses on the next question: **what should I fix first?** The classifier is rule-based on purpose, so every conclusion is auditable and the tool remains useful with sensitive local logs.

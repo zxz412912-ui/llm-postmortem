@@ -26,7 +26,7 @@ def load_jsonl(path: Path) -> tuple[list[dict], list[str]]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Find recurring LLM failures in JSONL call logs.")
+    parser = argparse.ArgumentParser(description="Find recurring LLM failures in normalized, Ollama, OpenAI, or LangChain JSONL logs.")
     parser.add_argument("input", type=Path, help="Path to JSONL logs")
     parser.add_argument("--output", "-o", type=Path, help="Write the Markdown report to this path")
     args = parser.parse_args()
